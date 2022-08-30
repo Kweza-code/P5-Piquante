@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "mongoose-errors": "^1.1.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
