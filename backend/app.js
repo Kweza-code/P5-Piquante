@@ -23,5 +23,6 @@ app.use((req, res, next) => {
   });
 
   //Racine de la routes d'authentification
+  app.use('/api/sauces', saucesRoutes);
   app.use('/api/auth', userRoutes);
   module.exports = app;

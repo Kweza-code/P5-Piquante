@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-var mongodbErrorHandler = require('mongoose-mongodb-errors');
 
 const sauceSchema = mongoose.Schema ({
 
@@ -15,5 +14,4 @@ const sauceSchema = mongoose.Schema ({
     usersLiked: [{ type: String }],
     usersDisliked: [{ type: String }],
 });
-sauceSchema.plugin(mongodbErrorHandler);
 module.exports = mongoose.model('Sauce', sauceSchema);
