@@ -1,4 +1,5 @@
 const express = require('express');
+const helmet = require("helmet");
 const  mongoSanitize  =  require ( 'express-mongo-sanitize' ) ;
 const mongoose = require('mongoose');
 const saucesRoutes = require('./routes/sauces');
@@ -15,7 +16,7 @@ mongoose.connect('mongodb+srv://france693:france693@cluster0.j8bhm1r.mongodb.net
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
- //
+ // espress mongo sanitize
   app.use(
     mongoSanitize({
       onSanitize: ({ req, key }) => {
@@ -23,6 +24,12 @@ mongoose.connect('mongodb+srv://france693:france693@cluster0.j8bhm1r.mongodb.net
       },
     }),
   );  
+// helmet
+app.use(
+  helmet({
+    referrerPolicy: { policy: "no-referrer" },
+  })
+);
 
 //Getting all contentType
 app.use(express.json());
