@@ -28,6 +28,12 @@ exports.getAllSauces = (req, res, next) => {
 };
 //----------------------------------------------------------
 exports.modifySauce =(req, res, next) => {
+    Sauce.findOne({ _id: req.params.id })
+    .then((sauce) => {
+    const filename = sauce.imageUrl.split('/images/')[1];
+    fs.unlink(`images/${filename}`, () => {});
+       })
+       .catch(error => res.status(403).json({ error }))
     const sauceObject = req.file ?
     {
         ...JSON.parse(req.body.sauce),
