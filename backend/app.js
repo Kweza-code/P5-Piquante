@@ -1,14 +1,28 @@
 const express = require('express');
+const  mongoSanitize  =  require ( 'express-mongo-sanitize' ) ;
 const mongoose = require('mongoose');
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/users');                                                          
 const app = express();
+const dotenv = require('dotenv').config();
+console.log(process.env.DB_USER)
+console.log(process.env.DB_PASS)
+console.log(process.env.SECRET_KEY)
 
 mongoose.connect('mongodb+srv://france693:france693@cluster0.j8bhm1r.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+ //
+  app.use(
+    mongoSanitize({
+      onSanitize: ({ req, key }) => {
+        console.warn(`This request[${key}] is sanitized`, req);
+      },
+    }),
+  );  
 
 //Getting all contentType
 app.use(express.json());
